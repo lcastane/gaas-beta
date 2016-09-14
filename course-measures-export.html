@@ -1,0 +1,240 @@
+<!DOCTYPE html="en">
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name=viewport content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <link rel="icon" href="favicon.ico">
+  <title id="the-title"></title>
+
+  <!-- Normalize -->
+  <link rel="stylesheet" type="text/css" href="css/cssnormalize-min.css">
+
+  <!-- Fonts -->
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!-- Scripts -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script>
+
+  <script type="text/javascript" src="lib/shim.js"></script>
+  <script type="text/javascript" src="lib/jszip.js"></script>
+  <!--<script type="text/javascript" src="lib/xlsx.core.min.js"></script>-->
+  <script type="text/javascript" src="lib/xlsx.js"></script>
+  <script type="text/javascript" src="lib/ods.js"></script>
+  
+
+  <script type="text/javascript" src="lib/typeahead.bundle.js"></script>
+
+  <!-- GAAS SCRIPT FILES -->
+  <script type="text/javascript" src="js/main.js"></script>
+  <script type="text/javascript" src="js/structures.js"></script>
+  <script type="text/javascript" src="js/courses.js"></script>
+</head>
+
+
+<body class="fuelux"  >
+
+    <!-- Navegation bar -->
+    <div id="auto_navbar"></div>
+    <!-- END Navegation bar -->
+
+
+ <!-- JUMBOTRON or Banner -->
+   <div class="header-wrapper hdr-lin-grad">
+    <div class="jumbotron img-accreditation">
+      <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-md-offset-2">
+          <img id="hdr-logo" alt="University of Victoria" src="img/uvic-logo.png"></img>
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-8"><h1 class="h1-jbt">Course Measurements</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END jumbotron -->
+
+
+  <!-- Main Container -->
+  <div class="container-fluid">
+    <div class="row">
+
+     <div class="col-md-1">
+     </div>
+
+      <div class="col-md-10">
+        <!-- Title -->
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Export Course Measures</h2>
+          </div>
+        </div>
+        <br>
+        <div class="row">
+          <!-- Courses Combobox -->
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+            <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-courses">
+              <input id="ddl_courses" type="text" class="form-control" value="Course" onchange="viewCourseData()">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+
+<!-- Auto list of courses >> getCourseDropdownList() -->
+                <ul id="auto_list_courses" class="dropdown-menu dropdown-menu-right scrollable-menu">
+
+
+                <li></li>
+                </ul>
+
+              </div>
+            </div>
+          </div>
+<!--
+<div class="col-xs-12 col-sm-3 col-md-3 col-lg-2" id="cou-list">
+<input type="text" data-provide="typeahead" placeholder="Courses">
+</div>
+-->
+          <!-- Section Combobox -->
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2" style="display: none;"  >
+            <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-section">
+              <input id="ddl_sections" type="text" class="form-control" readonly="readonly" value="Section" onchange="viewCourseData()">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+<!-- Auto list of tems >> getTermDropdownList() -->
+                  <ul id="auto_list_sections" class="dropdown-menu dropdown-menu-right">
+                  <li></li>
+                  </ul>
+
+              </div>
+            </div>
+          </div>
+          <!-- Year Combobox -->
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+            <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-year">
+              <input id="ddl_years" type="text" class="form-control" readonly="readonly" value="Year" onchange="viewCourseData()">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+<!-- Auto list of years >> getYearsDropdownList() -->
+                  <ul id="auto_list_years" class="dropdown-menu dropdown-menu-right">
+                  <li></li>
+                  </ul>
+              </div>
+            </div>
+          </div>
+          <!-- Term Combobox -->
+          <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+            <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-term">
+              <input id="ddl_terms" type="text" class="form-control" readonly="readonly" value="Term" onchange="viewCourseData()">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+<!-- Auto list of tems >> getTermDropdownList() -->
+                  <ul id="auto_list_terms" class="dropdown-menu dropdown-menu-right">
+                  <li></li>
+                  </ul>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Browse input group -->
+        <br>
+        <div class="row">
+
+          <!-- UPLOAD BUTTON -->
+          <div class="col-xs-12 col-sm-5 col-md-5 col-lg-5">
+
+<!--
+              <button type="button" class="btn btn-primary" id="btn-upload" onclick="importCourseData()">Import
+              </button>
+-->
+
+              <a href="#" role="button" class="btn btn-primary btn-save-tbl">Export CSV <span class="glyphicon filetypes-csv"></span></a>
+              <label id="lb-filename"></label>
+
+<!--
+              <button type="button" class="btn btn-primary btn-submit-tbl" onclick="exportCourseDataXLSX()">Export XLSX
+              </button>
+-->
+
+
+
+          </div>
+        </div>
+<br>
+
+        <div class ="row">
+          <div id="course-info" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p><i>
+            </i></p>
+          </div>
+        </div>
+
+        <div class ="row">
+          <div id="course-info" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+              <b>​ Spreadsheet column legend: </b><button type="button" class="btn btn-circle" data-toggle="collapse" data-target="#div-outcomes">
+          <span class="glyphicon glyphicon-info-sign"></span>
+          </button>
+
+          <div id="div-outcomes" class="collapse">
+            <p></p>
+          </div>
+          </div></div>
+
+
+        <!--
+        <div class ="row">
+          <div class="col-xs-4 col-sm-4 col-md-4 col-lg-3">
+            <button id="btn-view" type="but ton" class="btn btn-primary btn-block" onclick="viewCourseData()">View course measures</button>
+          </div>
+        </div>
+        <br>
+        -->
+        <!-- END Browse input group -->
+
+        <!-- TABLE -->
+        <div class="row">
+          <br>
+          <div class="col-md-12">
+            <div id="dv-data" class="table-responsive tbl-container"></div>
+          </div>
+        </div>
+
+
+
+        <!-- END Table Buttons -->
+
+        <div class="row">
+          <div class="col-md-12">
+               <div class="summary">
+               <br><br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-1">
+     </div>
+
+
+
+    </div>
+  </div>
+  <!-- END main container -->
+  <!-- FOOTER -->
+  <div class="footer-wrapper">
+    <footer class="container-fluid footer">
+      <div class="row">
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html="en">
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name=viewport content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <link rel="icon" href="favicon.ico">
+  <title id="the-title"></title>
+<!-- Normalize -->
+    <link rel="stylesheet" type="text/css" href="css/cssnormalize-min.css">
+    
+    <!-- Fonts -->
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css">
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <!-- Scripts -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script>
+    
+    <script type="text/javascript" src="js/main.js"></script>
+    <script type="text/javascript" src="js/reports.js"></script>
+    
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
+<!--
+    <script type="text/javascript">
+        google.charts.load('current', {
+            'packages': ['bar']
+        });
+        google.charts.setOnLoadCallback(drawChart);
+    </script>
+-->
+
+    <script type="text/javascript">
+        // Load the Visualization API and the corechart package.
+        google.load("visualization", "1", {
+            packages: ["corechart"]
+        });
+        // Set a callback to run when the Google Visualization API is loaded.
+        //google.setOnLoadCallback(drawChart);
+    </script>
+</head>
+
+<body class="fuelux" onload="getNavigationBar();generateYearCbReport();getCourseDropdownList();getProgramsDropdownList();">
+   
+    <!-- Navegation bar -->
+    <div id="auto_navbar"></div>    
+    <!-- END Navegation bar -->
+
+
+
+    <!-- JUMBOTRON or Banner -->
+    <div class="header-wrapper hdr-lin-grad">
+        <div class="jumbotron img-accreditation">
+            <div class="row ">
+                <div class="col-xs-2 col-sm-2 col-md-2 col-md-offset-2">
+                    <img id="hdr-logo" alt="University of Victoria" src="img/uvic-logo.png"></img>
+                </div>
+                <div class="col-xs-10 col-sm-10 col-md-8">
+                    <h1 class="h1-jbt">Assessment Reports</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END jumbotron -->
+
+    
+    <!-- Main Container -->
+    <div class="container-fluid">
+        <div class="row content">
+    <div class="col-md-1">
+     </div>
+     
+
+            <!-- Content -->
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h2>Report generator</h2>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p><b>Step 1:</b> Select a program</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p><b>Step 2:</b> Select a course</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <p><b>Step 3:</b> Select the years and the outcomes that should to be included in the report</p>
+                    </div>
+                </div>
+                <br>
+                <div class="row container-fluid">
+                    <div class="col-md-12 well">
+                        <div class="row">
+                            <!-- Program -->
+                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="cbx-program">
+                                    <input type="text" class="form-control" placeholder="-- Select Program"  readonly="readonly">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+<!-- Auto list of programs >> getProgramsDropdownList() -->
+                                        <ul id="auto_list_programs" class="dropdown-menu dropdown-menu-right">
+                                            <li></li>
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Course -->
+                            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                                <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="cbx-courses">
+                                    <input id="ddl_course" type="text" class="form-control" placeholder="-- Select Course"  readonly="readonly">
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+<!-- Auto list of courses >> getCourseDropdownList() -->
+                                        <ul id="auto_list_courses" class="dropdown-menu dropdown-menu-right">           
+                                            <li></li>                         
+                                        </ul>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <br>
+                        <!-- Row YEARS panel -->
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Select the <b>years</b> to be included in the report
+                                        <div class="checkbox slc-all-yrs">
+                                            <label class="checkbox-custom" data-initialize="checkbox">
+                                                <input class="sr-only" type="checkbox" value="SelectAllYrs">
+                                                <span class="checkbox-label">Select All</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+
+<!-- Auto ChB of Years >>  generateYearCbReport()-->
+                                    <div class="row" id="auto_chb_years"> </div>
+
+                                        
+                                    </div>
+                                </div>
+                                <!-- End Panel body -->
+                            </div>
+                            <!-- End Panel -->
+                        </div>
+                        <!-- Row OUTCOMES panel -->
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">Select the <b>outcomes</b> to be included in the report
+                                        <div class="checkbox slc-all-ocs">
+                                            <label class="checkbox-custom" data-initialize="checkbox">
+                                                <input class="sr-only" type="checkbox" value="SelectAllOcs">
+                                                <span class="checkbox-label">Select All</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <!-- Row 1 -->
+                                        <div class="row">
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O1">
+                                                        <span class="checkbox-label">O1</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O2">
+                                                        <span class="checkbox-label">O2</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O3">
+                                                        <span class="checkbox-label">O3</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O4">
+                                                        <span class="checkbox-label">O4</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O5">
+                                                        <span class="checkbox-label">O5</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O6">
+                                                        <span class="checkbox-label">O6</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Row 2 -->
+                                        <div class="row">
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O7">
+                                                        <span class="checkbox-label">O7</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O8">
+                                                        <span class="checkbox-label">O8</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O9">
+                                                        <span class="checkbox-label">O9</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O10">
+                                                        <span class="checkbox-label">O10</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O11">
+                                                        <span class="checkbox-label">O11</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="O12">
+                                                        <span class="checkbox-label">O12</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- Row 3 -->
+                                        <div class="row">
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="M1">
+                                                        <span class="checkbox-label">M1</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="M2">
+                                                        <span class="checkbox-label">M2</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="M3">
+                                                        <span class="checkbox-label">M3</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="FE">
+                                                        <span class="checkbox-label">FE</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                                <div class="checkbox slc-ocs">
+                                                    <label class="checkbox-custom" data-initialize="checkbox">
+                                                        <input class="sr-only" type="checkbox" value="FG">
+                                                        <span class="checkbox-label">FG</span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- End Panel body -->
+                            </div>
+
+
+                        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3">
+                        <button class="btn btn-primary btn-block btn-lg" type="button" id="btn-report" onclick="reportCourseTrends()" > Generate Report</button>
+                        </div>
+
+                        <!-- End Panel -->
+                       
+                        
+                        </div>
+                    </div>
+                </div>
+                <!-- Charts -->
+                <div class="row" id="dv-charts">
+                </div>
+            </div>
+            <!-- END Content -->
+
+<div class="col-md-1">
+     </div>
+     
+
+        </div>
+    </div>
+    <!-- END Main container -->
+    <!-- FOOTER -->
+    <div class="footer-wrapper">
+        <footer class="container-fluid footer">
+            <div class="row">
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,682 @@
+<!DOCTYPE html="en">
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name=viewport content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  
+  <link rel="icon" href="favicon.ico">
+  <title id="the-title"></title>
+
+<!-- Normalize -->
+  <link rel="stylesheet" type="text/css" href="css/cssnormalize-min.css">
+  <!-- Fonts -->
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://www.fuelcdn.com/fuelux/3.13.0/css/fuelux.min.css">
+  <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+  <!-- Scripts -->
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+  <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+  <script type="text/javascript" src="https://www.fuelcdn.com/fuelux/3.13.0/js/fuelux.min.js"></script>
+
+<!-- GAAS SCRIPT FILES -->  
+  <script type="text/javascript" src="js/main.js"></script>  
+  <script type="text/javascript" src="js/structures.js"></script>  
+  <script type="text/javascript" src="js/cis.js"></script>    
+
+
+</head>
+
+<body class="fuelux"  onload="getCIS()">
+
+    <!-- Navegation bar -->
+    <div id="auto_navbar"></div>    
+    <!-- END Navegation bar -->
+
+
+  <!-- JUMBOTRON or Banner -->
+  <div class="header-wrapper hdr-lin-grad">
+    <div class="jumbotron img-accreditation">
+      <div class="row">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-md-offset-2">
+          <img id="hdr-logo" alt="University of Victoria" src="img/uvic-logo.png"></img>
+        </div>
+        <div class="col-xs-10 col-sm-10 col-md-8"><h1 class="h1-jbt">Course Information Sheet</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- END jumbotron -->
+
+  <!-- Main Container -->
+  <div class="container-fluid">
+    
+    <div class="row">
+
+      <!-- Left space -->
+      <div class="col-md-1">
+      </div>
+     
+
+      <div class="col-md-10">
+      <!-- START Content -->
+
+        <!-- Title -->
+        <div class="row">
+          <div class="col-md-12">
+            <h2>Edit Course Information Sheet</h2>
+          </div>
+        </div>
+        <br>
+
+
+        <!-- Selection of course main data -->
+         <div class="row">
+
+          <!-- Courses Combobox -->
+          <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-courses">
+              <input id="cis-ddl-courses" type="text" class="form-control" readonly="readonly"  value="Course" onchange="getCIS()">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button> 
+                <!-- Auto list of courses >> getCourseDropdownList() -->
+                <ul id="auto_list_courses" class="dropdown-menu dropdown-menu-right scrollable-menu">
+                <li></li>                          
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Year Combobox -->
+          <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-year">
+              <input id="cis-ddl-years" type="text" class="form-control" readonly="readonly" value="Year" onchange="getCIS()">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+<!-- Auto list of years >> getYearsDropdownList() -->
+                  <ul id="auto_list_years" class="dropdown-menu dropdown-menu-right  scrollable-menu">
+                  <li></li>                          
+                  </ul>
+
+              </div>
+            </div>
+          </div>
+          <!-- Term Combobox -->
+          <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+            <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-term">
+              <input id="cis-ddl-terms" type="text" class="form-control" readonly="readonly" value="Term" onchange="getCIS()">
+              <div class="input-group-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+
+<!-- Auto list of tems >> getTermDropdownList() -->
+                <ul id="auto_list_terms" class="dropdown-menu dropdown-menu-right  scrollable-menu">
+                <li></li>                          
+                </ul>
+
+              </div>
+            </div>
+          </div>
+          <!-- Button -->
+         <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+<!--         <button type="button" class="btn btn-primary" id="btn-upload" onclick="getCIS()">View</button>         
+    -->     
+         <button type="button" class="btn btn-primary" id="btn-upload" onclick="saveCIS()">Save</button>         
+         </div>
+
+        </div>
+
+        <br>
+        <div class ="row">
+          <div id="course-info" class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <p><i></i></p>            
+          </div>
+          
+        </div>
+
+        
+        <!-- START CIS form -->
+        <div class="well">
+          <div class="row">
+            <div class="col-md-12">
+              <h3><p class="text-center">Course Information Sheet</p></h3>
+            </div>
+          </div>
+          <!--instructions-->
+          <div class="row">
+            <div class="col-md-12">
+              <h4><p class="text-left">Instructions</p></h4>
+              <p class="text-left">To be completed for every compulsory and elective course. Data used to validate input is stored in columns P-X of this worksheet. Macros are provided to add learning instructors, outcomes, texts and laboratory content.</p>
+              <br>
+            </div>
+          </div>
+
+          <form class="form-horizontal">
+            <!-- Course basic information -->
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <!--Course number-->
+                <div class="form-group">
+                  <label class="hidden-xs hidden-sm hidden-md col-lg-2 control-label" for="courseNumber">Course number</label>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                    <input type="text" class="form-control" id="frm-CourseNumber" readonly="readonly" placeholder="Course number">
+                  </div>
+                </div>
+                <!--Course title-->
+                <div class="form-group">
+                  <label class="hidden-xs hidden-sm hidden-md col-lg-2 control-label" for="courseTitle">Course title</label>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                    <input type="text" class="form-control" id="frm-CourseTitle" placeholder="Course title">
+                  </div>
+                </div>
+                <!--Calendar web link-->
+                <div class="form-group">
+                  <label class="hidden-xs hidden-sm hidden-md col-lg-2 control-label" for="calendarWebLink">Calendar web link</label>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                    <input type="text" class="form-control" id="frm-CalendarWebLink" placeholder="Calendar web link">
+                  </div>
+                </div>
+                <!--Note-->
+                <div class="form-group">
+                  <label class="hidden-xs hidden-sm hidden-md col-lg-2 control-label" for="note">Note</label>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8">
+                    <input type="text" class="form-control" id="frm-Note" placeholder="Note*">
+                  </div>
+                  <p class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-lg-offset-2 help-block"> <small>*Provide explanatory notes on incosistencies with calendar infromation (if applicable) </small></p>
+                </div>
+              </div>
+            </div>
+            <!--CEAB Panel -->
+            <div class="panel panel-default">
+              <div class="panel-heading"><h4> CEAB section </h4></div>
+              <div class="panel-body ">
+                <!--CEAB course type-->
+                <div class="form-group">
+                  <label class="col-xs-12 col-sm-12 col-md-12 col-lg-12" for="CourseType">Course type</label>
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-CEABComp">
+                      <input id="frm-compu" type="text" class="form-control" placeholder="Compulsory" readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="2"><a href="#">X</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-CEABElect">
+                      <input id="frm-elec" type="text" class="form-control" placeholder="Elective" readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="1"><a href="#">E</a></li>
+                          <li data-value="2"><a href="#">M</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!--CEAB AU percentage-->
+                <div class="form-group">
+                  <label class="col-xs-12 col-sm-12 col-md-12 col-lg-12" for="CurriculumCategoryContent">Curriculum category content <small>(AU Percentage)</small></label>
+                  
+                  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                    <label>Math</label>
+                    <div class="input-group">
+                      <input id="frm-math-perc"  pattern="[0-9]" type="text" class="form-control" id="frm-Math-Per" placeholder="Math" readonly>
+                      <span class="input-group-addon" id="addonMath">%</span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                  <label>Natual science</label>
+                    <div class="input-group">
+                      <input id="frm-natsc-perc" type="text" class="form-control" id="frm-NatSci-Per" placeholder="Natural Science" readonly>
+                      <span class="input-group-addon" id="addon-NatSci">%</span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                  <label>Complement. studies</label>
+                    <div class="input-group">
+                      <input id="frm-comst-perc" type="text" class="form-control" id="frm-ComStu-Per" placeholder="Complementary studies" readonly>
+                      <span class="input-group-addon" id="addon-ComStu">%</span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                  <label>Engineering science</label>
+                    <div class="input-group">
+                      <input id="frm-engsc-perc" type="text" class="form-control" id="frm-EngSci-Per" placeholder="Engineering science" readonly>
+                      <span class="input-group-addon" id="addon-EngSci">%</span>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                  <label>Engnineering design</label>
+                    <div class="input-group">
+                      <input id="frm-engds-perc" type="text" class="form-control" id="frm-EngSci-Per" placeholder="Engineering design" readonly>
+                      <span class="input-group-addon" id="addon-EngSci">%</span>
+                    </div>
+                  </div>
+                </div>
+                <!--CEAB Curriculum category content-->
+                <div class="form-group">
+                  <label class="sr-only" for="AUpercentage">Curriculum category content</label>
+                  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                    <input id="frm-math-score" type="text" class="form-control" id="frm-Math" placeholder="Math">
+                  </div>
+                  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                    <input id="frm-natsc-score" type="text" class="form-control" id="frm-NatSci" placeholder="Natural Science">
+                  </div>
+                  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                    <input id="frm-comst-score" type="text" class="form-control" id="frm-ComStu" placeholder="Complementary studies">
+                  </div>
+                  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                    <input id="frm-engsc-score" type="text" class="form-control" id="frm-EngSci" placeholder="Engineering science">
+                  </div>
+                  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                    <input id="frm-engds-score" type="text" class="form-control" id="frm-EngDes" placeholder="Engineering design">
+                  </div>
+                  <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                     <input type="text" class="form-control" readonly="readonly" id="frm-Total" placeholder="Total">
+                  </div>
+                </div>
+                <!--CEAB Graduate attribute content-->
+                <div class="form-group">
+                  <label class="col-xs-12 col-sm-12 col-md-12 col-lg-12" for="GraduateAttributeContent">Graduate attribute content**</label>
+                  <p class="col-xs-12 col-sm-12 col-md-12 col-lg-12 help-block ">
+                    <small> <strong>Content level codes</strong>:<br><strong>blank</strong> = not applicable (less than 2 AU); <strong>I</strong> = introduced (introductory); <strong>D</strong> = developed (intermediate); <strong>A</strong> = applied (advanced)</small>
+                  </p>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2" >
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-1">
+                      <input id="frm-kb" type="text" class="form-control" placeholder="KB" readonly="readonly">
+                      <div class="input-group-btn">
+                        KB<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">01 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-2">
+                      <input id="frm-pa" type="text" class="form-control" placeholder="PA" readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">02 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-3">
+                      <input id="frm-inv" type="text" class="form-control" placeholder="Inv." readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">03 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-4">
+                      <input id="frm-des" type="text" class="form-control" placeholder="Des." readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">04 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                         <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                          </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-5">
+                      <input id="frm-tool" type="text" class="form-control" placeholder="Tools" readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">05 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-6">
+                        <input id="frm-team" type="text" class="form-control" placeholder="Team" readonly="readonly">
+                        <div class="input-group-btn">
+                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">06 <span class="caret"></span></button>
+                          <ul class="dropdown-menu dropdown-menu-right">
+                           <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                          </ul>
+                        </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-7">
+                      <input id="frm-comm" type="text" class="form-control" placeholder="Comm." readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">07 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-8">
+                      <input id="frm-prof" type="text" class="form-control" placeholder="Prof." readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">08 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-9">
+                      <input id="frm-imp" type="text" class="form-control" placeholder="Impacts" readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">09 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-10">
+                      <input id="frm-eth" type="text" class="form-control" placeholder="Ethics" readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">10 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                       <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-11">
+                      <input id="frm-eco" type="text" class="form-control" placeholder="Econ." readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">11 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-3 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-12">
+                      <input id="frm-ll" type="text" class="form-control" placeholder="LL" readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">12 <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="Introduced"><a href="#">I</a></li>
+                          <li data-value="Developed"><a href="#">D</a></li>
+                          <li data-value="Applied"><a href="#">A</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <p class="col-xs-12 col-sm-12 col-md-12 col-lg-12 help-block"> <small>**Enter content code most appropriate for each attribute</small></p>
+                </div>
+              </div>
+            </div>
+<!--Professor in charge-->
+            <div class="panel panel-default">
+              <div class="panel-heading"><h4> Professor in charge </h4></div>
+              <div class="panel-body">
+
+                <div class="form-group">
+                  <p class="hidden-xs col-sm-12 hidden-md hidden-lg help-block ">
+                    <small> <strong>1st Line:</strong> Family name, and Initial(s); <strong>2nd Line:</strong> L. Status, Doctorate and Acad Rank </small>
+                  </p>
+                  <p class="col-xs-12 hidden-sm hidden-md hidden-lg help-block ">
+                    <small> <strong>Line:</strong> (1) Family name, (2) Initial(s), (3) L. Status, (4) Doctorate and (5) Acad Rank </small>
+                  </p>
+                  <label class="hidden-xs hidden-sm col-md-4 col-lg-4" for="CourseType">Family name</label>
+                  <label class="hidden-xs hidden-sm col-md-2 col-lg-2" for="CourseType">Initial(s)</label>
+                  <label class="hidden-xs hidden-sm col-md-2 col-lg-2" for="CourseType">L. Status</label>
+                  <label class="hidden-xs hidden-sm col-md-2 col-lg-2" for="CourseType">Doctorate</label>
+                  <label class="hidden-xs hidden-sm col-md-2 col-lg-2" for="CourseType">Acad Rank</label>
+                </div>
+
+                 <div id="auto-prof-charge"></div>
+          
+            </div>
+            <!--All other instructor(s) -->
+            <div class="panel panel-default">
+              <div class="panel-heading"><h4> All other instructor(s) </h4></div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <p class="hidden-xs col-sm-12 hidden-md hidden-lg help-block ">
+                    <small> <strong>1st Line:</strong> Family name, and Initial(s); <strong>2nd Line:</strong> L. Status, Doctorate and Acad Rank </small>
+                  </p>
+                  <p class="col-xs-12 hidden-sm hidden-md hidden-lg help-block ">
+                    <small> <strong>Line:</strong> (1) Family name, (2) Initial(s), (3) L. Status, (4) Doctorate and (5) Acad Rank </small>
+                  </p>
+                  <label class="hidden-xs hidden-sm col-md-4 col-lg-4" for="CourseType">Family name</label>
+                  <label class="hidden-xs hidden-sm col-md-2 col-lg-2" for="CourseType">Initial(s)</label>
+                  <label class="hidden-xs hidden-sm col-md-2 col-lg-2" for="CourseType">L. Status</label>
+                  <label class="hidden-xs hidden-sm col-md-2 col-lg-2" for="CourseType">Doctorate</label>
+                  <label class="hidden-xs hidden-sm col-md-2 col-lg-2" for="CourseType">Acad Rank</label>                 
+                  </div>
+
+                  <div id="auto-other-prof"></div>
+                  
+              </div>
+            </div>
+            <!--Course Schedule -->
+            <div class="panel panel-default">
+              <div class="panel-body">
+                <!-- Hourse per week -->
+                   <div class="form-group">
+                      <label class="col-xs-12 col-sm-12 col-md-6 col-lg-4" for="FailureRate">Total instructional hours per week</label>
+                      <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                      <input type="text" class="form-control" id="frm-cs-hr-week" placeholder="Hours per week">
+                      </div>
+
+                   </div>
+
+                <!-- Hourse per section -->
+                  <div class="form-group">
+                  <label class="col-xs-12 col-sm-12 col-md-6 col-lg-4" for="HourPerSection">Hour per section</label>
+                  <label class="hidden-xs hidden-sm col-md-6 col-lg-8" for="TotalNumberOfSections">Total number of sections</label>
+                  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                    <input type="text" class="form-control" id="frm-cs-hr-lect" placeholder="Hourse per lecture">
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                    <input type="text" class="form-control" id="frm-cs-hr-lab" placeholder="Hourse per lab/tut">
+                  </div>
+                  <!-- Total number of sections -->
+                  <label class="col-xs-12 col-sm-12 hidden-md hidden-lg" for="TotalNumberOfSections"><br>Total number of sections</label>
+                  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                    <input type="text" class="form-control" id="frm-cs-num-lect" placeholder="Number of lecture">
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                    <input type="text" class="form-control" id="frm-cs-num-lab" placeholder="Number of lab/tut">
+                  </div>
+                </div>
+                <!-- Teaching Assistants -->
+                <div class="form-group">
+                  <label class="col-xs-12 col-sm-12 col-md-6 col-lg-4" for="TeachingAssistants">Teaching assistants</label>
+                  <label class="hidden-xs hidden-sm col-md-6 col-lg-4" for="AverageGrade">Average grade</label>
+                  <label class="hidden-xs hidden-sm hidden-md col-lg-4" for="FailureRate">Failure rate</label>
+                  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                    <input type="text" class="form-control" id="frm-cs-ta-num" placeholder="Number of TA">
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                    <input type="text" class="form-control" id="frm-cs-ta-hrs" placeholder="Hours per TA">
+                  </div>
+                  <!-- Average Grade -->
+                  <label class="col-xs-12 col-sm-12 hidden-md hidden-lg" for="AverageGrade"><br>Average grade</label>
+                  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-cs-avg-per">
+                      <input id="frm-avg-gra-per" type="text" class="form-control" placeholder="Percentage (%)" readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+                        <ul id="ddm-avg-gra-per" class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="1"><a href="#">&gt;90</a></li>
+                          <li data-value="2"><a href="#">89-85</a></li>
+                          <li data-value="3"><a href="#">84-80</a></li>
+                          <li data-value="4"><a href="#">79-75</a></li>
+                          <li data-value="5"><a href="#">74-70</a></li>
+                          <li data-value="6"><a href="#">69-65</a></li>
+                          <li data-value="7"><a href="#">64-60</a></li>
+                          <li data-value="8"><a href="#">59-55</a></li>
+                          <li data-value="9"><a href="#">54-50</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-cs-avg-letter">
+                      <input id= "frm-avg-gra-let" type="text" class="form-control" placeholder="Letter" readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="1"><a href="#">A+</a></li>
+                          <li data-value="2"><a href="#">A</a></li>
+                          <li data-value="3"><a href="#">A-</a></li>
+                          <li data-value="4"><a href="#">B+</a></li>
+                          <li data-value="5"><a href="#">B</a></li>
+                          <li data-value="6"><a href="#">C+</a></li>
+                          <li data-value="7"><a href="#">C</a></li>
+                          <li data-value="8"><a href="#">D+</a></li>
+                          <li data-value="9"><a href="#">D</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                  <!-- Failure rate -->
+                  <label class="col-xs-12 col-sm-12 col-md-12 hidden-lg" for="FailureRate"><br>Failure rate</label>
+                  <div class="col-xs-12 col-sm-6 col-md-3 col-lg-2">
+                    <div class="input-group input-append dropdown combobox" data-initialize="combobox" id="comb-cs-fr">
+                      <input id="frm-fail-rate" type="text" class="form-control" placeholder="Failure rate (%)" readonly="readonly">
+                      <div class="input-group-btn">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">&#8291<span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right">
+                          <li data-value="-1"><a href="#">&#8291</a></li>
+                          <li data-value="1"><a href="#">0</a></li>
+                          <li data-value="2"><a href="#">1-2</a></li>
+                          <li data-value="3"><a href="#">3-5</a></li>
+                          <li data-value="4"><a href="#">6-10</a></li>
+                          <li data-value="5"><a href="#">11-15</a></li>
+                          <li data-value="6"><a href="#">16-20</a></li>
+                          <li data-value="7"><a href="#">21-30</a></li>
+                          <li data-value="8"><a href="#">&gt;30</a></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group"></div>
+
+              </div>
+            </div>
+            <!--Major learning outcomes -->
+            <div class="panel panel-default">
+              <div class="panel-heading"><h4>Major learning outcomes</h4></div>
+              <div class="panel-body">
+                <label class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" for="LearningOutcomeIndicators">Learning outcome indicators</label>
+                
+<div id="auto-outcomes"></div>
+                
+
+
+              </div>
+            </div>
+            <!--Required text(s) -->
+            <div class="panel panel-default">
+              <div class="panel-heading"><h4>Required text(s)</h4></div>
+              <div class="panel-body">
+                <label class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center" for="AuthorTitlePublisherYear">Author : Title : Publisher : Year</label>
+             
+<div id="auto-textbooks"></div>
+
+              </div>
+            </div>
+            <!--Laboratory experience -->
+            <div class="panel panel-default">
+              <div class="panel-heading"><h4>Laboratory experience</h4></div>
+              <div class="panel-body">
+                <label class="col-xs-4 col-sm-4 col-md-3 col-lg-3" for="Type">Type</label>
+                <label class="col-xs-8 col-sm-8 col-md-9 col-lg-9" for="BriefIndicationOfTopic">Brief indication of topic/experiment</label>
+                
+
+                  <div id="auto-labs"></div>
+
+                      
+                <div class="col-xs-12 col-sm-2 col-md-2 col-lg-2">
+                <br>
+                 <button type="button" class="btn btn-primary" id="btn-upload" onclick="saveCIS()">Save</button>         
+                </div>
+
+            </div>
+
+          </form>
+
+        </div>
+        <!-- END Content -->
+
+      <div class="col-md-1">
+      </div>
+</div>
+      </div>
+    </div>
+    <!-- END main container -->
+  </div>
+  <!-- FOOTER -->
+  <div class="footer-wrapper">
+    <footer class="container-fluid footer">
+      <div class="row">
+      </div>
+    </footer>
+  </div>
+</body>
+
+</html>

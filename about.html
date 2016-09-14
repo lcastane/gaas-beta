@@ -1,0 +1,193 @@
+<!DOCTYPE html="en">
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name=viewport content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <link rel="icon" href="favicon.ico">
+  <title id="the-title"></title>
+
+
+  <!-- Normalize -->
+  <link rel="stylesheet" type="text/css" href="css/cssnormalize-min.css">
+  
+  <!-- Fonts -->
+  <link rel="stylesheet" type="text/css" href="css/font-awesome.min.css">
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/fuelux.min.css">  
+  <link rel="stylesheet" type="text/css" href="css/bootstrap-social.css">
+  <link rel="stylesheet" type="text/css" href="css/main.css">
+
+  <!-- Scripts (the order matters)-->
+
+  <script type="text/javascript" src="lib/jquery-1.12.4.min.js"></script>
+  <script type="text/javascript" src="lib/bootstrap.min.js"></script>
+  <script type="text/javascript" src="lib/fuelux.min.js"></script>
+  <script type="text/javascript" src="lib/loader.js"></script>
+  <script type="text/javascript" src="lib/jszip.js"></script>
+  <script type="text/javascript" src="lib/shim.js"></script>
+  <script type="text/javascript" src="lib/xlsx.js"></script>  
+  <script type="text/javascript" src="lib/ods.js"></script>
+  <script type="text/javascript" src="lib/xlsx.core.min.js"></script>
+
+  <!-- GAAS SCRIPT FILES -->  
+  <script type="text/javascript" src="js/main.js"></script>  
+  <script type="text/javascript" src="js/help.js"></script>  
+
+</head>
+
+<body class="fuelux" onload="getNavigationBar();">
+    
+    <!-- Navegation bar -->
+    <div id="auto_navbar"></div>    
+    <!-- END Navegation bar -->
+
+
+    <!-- JUMBOTRON or Banner -->
+    <div class="header-wrapper hdr-lin-grad">
+        <div class="jumbotron img-accreditation">
+            <div class="row ">
+                <div class="col-md-2 col-md-offset-1">
+                    <img id="hdr-logo" alt="University of Victoria" src="img/uvic-logo.png"></img>
+                </div>
+                <div class="hidden-xs hidden-sm col-md-9 col-lg-9">
+                    <h1 class="h1-jbt">Graduate Attribute Assessment System</h1>
+                </div>
+                <div class="col-xs-12 col-sm-12 hidden-md hidden-lg">
+                    <h1 class="h1-jbt">GAAS</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END jumbotron -->
+
+    
+    <!-- Main Container -->
+    <div class="container-fluid">
+    <br>       
+     <div class="col-md-1"> </div> 
+
+      <div id="main-content" class="col-md-10">     
+
+
+        <ul style="list-style: none outside none;">
+          <li><a href="#about">About</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#feedback">Feedback</a></li>
+          <li><a href="#instructors">Instructors Help</a></li>
+          <li><a href="#pats">PATs help</a></li>
+          <li><a href="#admin">Admin help</a></li>
+          <li><a href="#glossary">Glossary</a></li>
+        </ul>
+
+       <a name="about"></a>
+       <h1>About</h1>
+       
+        <p>GAAS - Graduate Attribute Assessment System, Faculty of Engineering, University of Victoria.</p>
+        
+        <p>The goal of GAAS is to automate the collection and management of course information and 
+        outcome measures for courses required by programs in the Faculty of Engineering. Course
+        instructors update course information </p>
+
+        <p>
+        Designed and implemented by Lorena Castañeda and Hausi A. Müller, University of Victoria.
+        Supported by the Faculty of Engineering Graduate Attribute Assessment Committee (GAAC).</p>
+
+        <p>Version: GAAS 1.0.14 (released Sep 11, 2016)</p>
+
+        <p>Copyright © 2016 University of Victoria, Faculty of Engineering. All Rights Reserved.
+        </p>
+
+
+        <a name="programs"></a>
+        <h1>Programs</h1>
+        
+        Academic programs supported by GAAS:
+        <ul>
+        <li>BME-ELEC – Biomedical-Electrical Engineering Program</li>
+        <li>BME-MECH – Biomedical-Mechanical Engineering Program</li>
+        <li>BSENG – Software Engineering Program</li>
+        <li>CSC – Computer Science Programs</li>
+        <li>CENG – Computer Engineering Program</li>
+        <li>CIVIL – Civil Engineering Program</li>
+        <li>ELEC – Electrical Engineering Program</li>
+        <li>MECH – Mechanical Engineering Program</li>
+        </ul>
+
+
+        <a name="feedback"></a>
+        <h1>Feedback</h1>
+        
+        <p>We greatly appreciate constructive feedback on the UVic Graduate Attribute Assessment System (GAAS). </p>
+        
+        <p>Please send feedback by email to <b>engrgaas[at]uvic.ca</b>.</p>
+
+        <a name="instructors"></a>
+        <h1>Instructors Help </h1>
+        
+        <h3>Login</h3>
+        <p>Netlink IDs for people who need access to GAAS must be registered with GAAS using the GAAS account and permission management system. To register a netlink ID with GAAS, send a note to engrgaas[at]uvic.ca.</p>
+        <p>GAAS login involves a two-stage verification process: (1) the userid is verified using the GAAS account management system; (2) the userid and password are verified using the UVic netlink management system.
+        <p>Once you successfully logged in to GAAS you have readonly access to GAAS information and read-write access to your courses.</p>
+
+        <h3>At the beginning of a term</h3>
+        <p>Browse through the status pages for Course Information Sheet (CIS) and course measures for previous terms to get an idea what information is stored in these pages.</p>
+        <p>Update the CIS for course (e.g., calendar weblink, professors in charge, hours, and sections). Please ignore the CEAB section which will be updated by your Program Accreditation Team (PAT). Inform you program coordinator if you change the text of outcomes. </p>
+        <p>Download the course measures spreadsheet template for your course. Note a course CIS sheet must be present to be able to download a course measures template.</p>
+        <p>Discuss with your PAT which outcomes you are going to measure.</p>
+        
+        <h3>Throughout the term</h3>
+        <p>Upload course measures regularly — up to 12 outcome measures, up to 3 midterm mark and 1 final exam mark (i.e., all measures should be scaled to the range 0..100). If your course has multiple sections, please submit course measures using one spreadsheet for the entire course.</p>
+
+        <h3>At the end of a term</h3>
+        <p>Update the Course Information Sheet (CIS) for course (e.g., average grade, failure rate). </p>
+        <p>Note that the information of a previous term will be frozen at the beginning of a new term.</p>
+
+        <a name="pats"></a>
+        <h1>PATs Help</h1>
+        
+        <p>Under construction</p>
+
+        <a name="admin"></a>
+        <h1>Admin Help </h1>
+        
+        <h3>Login</h3>
+        <p>Netlink IDs for people who need access to GAAS must be registered with GAAS using the GAAS account and permission management system. To register a netlink ID with GAAS, send a note to engrgaas[at]uvic.ca.</p>
+        <p>GAAS login involves a two-stage verification process: (1) the userid is verified using the GAAS account management system; (2) the userid and password are verified using the UVic netlink management system.</p>
+        <h3>At the beginning of a term</h3>
+        <p>Add instructors for the new term using the GAAS permission management system</p>
+        <p>Update permissions for instructors (i.e., readonly for courses/instructors of previous term and read/write for courses/instructors for new term)</p>
+        <p>Copy the CIS sheets from the latest previous term where a course was offered to the new term</p>
+
+
+        <a name="glossary"></a>
+        <h1>Glossary</h1>
+        
+        <ul>
+        <li>CEAB – Canadian Engineering Accreditation Board</li>
+        <li>CIS – Course Information Sheet</li>
+        <li>GAAC – Graduate Attribute Assessment Committee</li>
+        <li>GAAS – Graduate Attributes Assessment System</li>
+        <li>PAT – Program Accreditation Team</li>
+        </ul>
+
+      
+      </div>
+    </div>
+    <!-- END main container -->
+    <!-- FOOTER -->
+    <div class="footer-wrapper">
+        <footer class="container-fluid footer">
+            <div class="row">
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
